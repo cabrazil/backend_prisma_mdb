@@ -25,9 +25,7 @@ model Customer {
 }
 
 model Card {
-  id                    String    @id @default(auto()) @map("_id") @db.ObjectId
-  created_at            DateTime? @default(now())
-  updated_at            DateTime? @default(now())
+  id                    String       @id @default(auto()) @map("_id") @db.ObjectId
   card_name             String
   issuer                String
   annual_fee            Int
@@ -42,22 +40,14 @@ model Card {
   add_cards_charge      Float
   req_min_income        Float
   req_min_investment    Float
-  zerofees              ZeroFee[]
   rewards               Reward[]
+  MileProgram           MileProgram?
+  lounges               Lounge[]
+  zerofees              ZeroFee[]
+  created_at            DateTime?    @default(now())
+  updated_at            DateTime?    @default(now())
 
   @@map("cards")
-}
-
-model ZeroFee {
-  id           String @id @default(auto()) @map("_id") @db.ObjectId
-  expenses     String
-  investments  String
-  fee_discount Int
-  notes        String
-  Card         Card   @relation(fields: [CardId], references: [id])
-  CardId       String @unique @db.ObjectId
-
-  @@map("zerofees")
 }
 
 model Reward {
@@ -72,4 +62,46 @@ model Reward {
   Card              Card    @relation(fields: [cardId], references: [id])
 
   @@map("rewards")
+}
+
+model MileProgram {
+  id                  String   @id @default(auto()) @map("_id") @db.ObjectId
+  program_name        String
+  transfer_program    String[]
+  airlines            String[]
+  hotels              String[]
+  points_to_miles     Int
+  points_min_transfer Int
+  stores              String
+  pay_bills           Boolean
+  Card                Card     @relation(fields: [CardId], references: [id])
+  CardId              String   @unique @db.ObjectId
+
+  @@map("mileprogram")
+}
+
+model Lounge {
+  id           String   @id @default(auto()) @map("_id") @db.ObjectId
+  lounge_name  String
+  br_airport   String[]
+  int_airport  String[]
+  access_limit Int
+  conditions   String
+  notes        String
+  Card         Card     @relation(fields: [CardId], references: [id])
+  CardId       String   @unique @db.ObjectId
+
+  @@map("lounges")
+}
+
+model ZeroFee {
+  id           String @id @default(auto()) @map("_id") @db.ObjectId
+  expenses     String
+  investments  String
+  fee_discount Int
+  notes        String
+  Card         Card   @relation(fields: [CardId], references: [id])
+  CardId       String @unique @db.ObjectId
+
+  @@map("zerofees")
 }

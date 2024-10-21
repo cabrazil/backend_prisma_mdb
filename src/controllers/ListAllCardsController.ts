@@ -5,9 +5,9 @@ class ListAllCardsController {
     async handle(request: FastifyRequest, reply: FastifyReply) {
         const listAllCardsService = new ListAllCardsService();
 
-        const minicards = await listAllCardsService.execute();
+        const cards = await listAllCardsService.execute();
 
-        reply.send(minicards)
+        reply.send(cards)
     }
 }
 

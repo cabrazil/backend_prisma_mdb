@@ -3,13 +3,14 @@ import prismaClient from "../prisma";
 class ListAllCardsService {
     async execute() {
 
-        const minicards = await prismaClient.minicard.findMany({
+        const cards = await prismaClient.card.findMany({
             include: {
-                zero_fees: true,
+                zerofees: true,
+                rewards: true
             },
         });
 
-        return minicards;
+        return cards;
     }
 }
 

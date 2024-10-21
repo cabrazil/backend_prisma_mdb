@@ -22,7 +22,7 @@ export async function routes(fastify: FastifyInstance, options: FastifyPluginOpt
         return new DeleteCustomerController().handle(request, reply)
     })
 
-    fastify.get("/minicards", async (request: FastifyRequest, reply: FastifyReply) => {
+    fastify.get("/cards", async (request: FastifyRequest, reply: FastifyReply) => {
         return new ListAllCardsController().handle(request, reply)
     })
 

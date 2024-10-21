@@ -1,0 +1,120 @@
+{
+  "card_name": "Itaú Mastercard Black Personnalité",
+  "issuer": "Itaú",
+  "annual_fee": 1056,
+  "card_brand": "Mastercard",
+  "category": "Black",
+  "ranking_points": 0,
+  "ranking_benefits": 0,
+  "ranking_annuity": 0,
+  "ranking_miles_program": 0,
+  "spread_rate": 5.0,
+  "iof_rate": 0.0,
+  "virtual_wallets": [
+    "Google Pay",
+    "Samsung Pay",
+    "Apple Pay",
+    "Paypal"
+  ],
+  "add_cards_amount": 6,
+  "add_cards_charge": 0.00,
+  "card_limit": "Limite definido e pode ser consultado no app ou canais do banco",
+  "req_min_income": 15000.00,
+  "req_min_investment": 50000.00,
+  "zero_annual_fee": {
+    "conditions": [
+      {
+        "expenses": "Gastos > 10.000 reais",
+        "investments": "Investimentos >= 50.000 reais",
+        "fee_discount": 100,
+        "notes": ""
+      }
+    ]
+  },
+  "rewards": {
+    "types": [
+      {
+        "expenses": "compras nacionais",
+        "points_per_dollar": 2,
+        "points_per_real": 0,
+        "rules": "",
+        "points_limit": 0,
+        "expiration": false
+      },
+      {
+        "expenses": "compras exterior",
+        "points_per_dollar": 3,
+        "points_per_real": 0,
+        "rules": "",
+        "points_limit": 0,
+        "expiration": false
+      }
+    ]
+  },
+  "mileage_programs": [
+    {
+      "program_name": "UIPP",
+      "transfer_program": [
+        "Livelo"
+      ],
+      "airlines": [
+        "LATAM(1x1), SMILES(1x1), AZUL(1x1), TAP MILES GO(1x1)"
+      ],
+      "hotels": [
+        ""
+      ],
+      "transfer_rate": {
+        "points_to_miles": 1,
+        "min_transfer": 0
+      },
+      "exchange": {
+        "store": "",
+        "pay_bills": true
+      }
+    }
+  ],
+  "lounge_access": {
+    "vip_lounges": [
+      {
+        "lounge_name": "LoungeKey",
+        "br_airport": [
+          "Brasília(BSB), Cuiabá(CGB), Foz do Iguaçu(IGU), Goiânia(GYN), Congonhas(CHG), Galeão(GIG), Guarulhos(GRU), Santos Dumont(SDU)"
+        ],
+        "int_airport": [
+          "Mais de 1.100 salas ao redor do mundo"
+        ],
+        "access_limit": "2 acessos por cartão, titular e adicionais, gratuitos por ano",
+        "conditions": ""
+      },
+      {
+        "lounge_name": "VIP Mastercard Black",
+        "br_airport": [
+          "Guarulhos(GRU)"
+        ],
+        "int_airport": [],
+        "access_limit": "Ilimitado",
+        "conditions": ""
+      }
+    ]
+  },
+  "other_benefits": {
+    "insurance": {
+      "travel_insurance": true,
+      "purchase_protection": true,
+      "car_rental_insurance": true,
+      "concierge": true
+    },
+    "tag": {
+      "name": "TAG Itaú",
+      "amount": 1
+    },
+    "cashback": {
+      "rules": "Troca por dinheiro no App"
+    },
+    "exclusive_offers": [
+      "50% de desconto em cinemas e teatros parceiros",
+      "iPhone pra Sempre"
+    ]
+  },
+  "additional_info": []
+}
