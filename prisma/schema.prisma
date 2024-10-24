@@ -33,6 +33,7 @@ model Card {
   annual_fee            Int
   card_brand            String
   category              String
+  card_limit            String
   ranking_points        Int
   ranking_benefits      Int
   ranking_annuity       Int

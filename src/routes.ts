@@ -3,6 +3,7 @@ import { CreateCustomerController } from './controllers/CreateCustomerController
 import { ListCustomersController } from './controllers/ListCustomersController';
 import { DeleteCustomerController } from './controllers/DeleteCustomerController';
 import { ListAllCardsController } from './controllers/ListAllCardsController'
+import { ListAllZerofeesControler } from './controllers/ListAllZerofeesControler';
 
 export async function routes(fastify: FastifyInstance, options: FastifyPluginOptions) {
 
@@ -26,4 +27,7 @@ export async function routes(fastify: FastifyInstance, options: FastifyPluginOpt
         return new ListAllCardsController().handle(request, reply)
     })
 
+    fastify.get("/zerofees", async (request: FastifyRequest, reply: FastifyReply) => {
+        return new ListAllZerofeesControler().handle(request, reply)
+    })
 }
