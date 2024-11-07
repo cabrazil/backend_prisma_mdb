@@ -6,8 +6,13 @@ class ListAllCardsService {
         const cards = await prismaClient.card.findMany({
             include: {
                 zerofees: true,
-                rewards: true
+                rewards: true,
+                mileages: true,
+                lounges: true
             },
+            orderBy: {
+                issuer: 'desc',
+            }
         });
 
         return cards;

@@ -30,7 +30,7 @@ model Card {
   updated_at            DateTime? @default(now())
   card_name             String
   issuer                String
-  annual_fee            Int
+  annual_fee            Float
   card_brand            String
   category              String
   card_limit            String
@@ -41,22 +41,37 @@ model Card {
   virtual_wallets       String[]
   add_cards_amount      Float
   add_cards_charge      Float
-  req_min_income        Float
-  req_min_investment    Float
+  card_material         String?
+  contactless           Boolean?
+  get_conditions        String[]
+  spread_on             String
+  cashback              String
+  obs_add_cards         String
+  obs_cashback          String
+  account_holder        Boolean
+  international_card    Boolean
+  card_modality         String
+  vip_lounge_app        String
+  spread_rate           Float
+  iof_rate              Float
+  ranking_vip_lounges   Float
   zerofees              ZeroFee[]
   rewards               Reward[]
+  lounges               Lounge[]
+  mileages              Mileage[]
 
   @@map("cards")
 }
 
 model ZeroFee {
-  id           String @id @default(auto()) @map("_id") @db.ObjectId
-  expenses     String
-  investments  String
-  fee_discount Int
-  notes        String
-  Card         Card   @relation(fields: [CardId], references: [id])
-  CardId       String @unique @db.ObjectId
+  id             String   @id @default(auto()) @map("_id") @db.ObjectId
+  expenses       String
+  investments    String
+  fee_discount   Int
+  notes          String
+  Card           Card     @relation(fields: [CardId], references: [id])
+  CardId         String   @unique @db.ObjectId
+  get_conditions String[]
 
   @@map("zerofees")
 }
@@ -73,4 +88,35 @@ model Reward {
   Card              Card    @relation(fields: [cardId], references: [id])
 
   @@map("rewards")
+}
+
+model Lounge {
+  id           String   @id @default(auto()) @map("_id") @db.ObjectId
+  lounge_name  String
+  br_airport   String[]
+  int_airport  String
+  access_limit String
+  conditions   String
+  cardId       String   @unique @db.ObjectId
+  Card         Card     @relation(fields: [cardId], references: [id])
+
+  @@map("lounges")
+}
+
+model Mileage {
+  id                String   @id @default(auto()) @map("_id") @db.ObjectId
+  program_name      String
+  transfer_program  String[]
+  airlines          String[]
+  hotels            String[]
+  rate_points_miles Float
+  min_transfer      Int
+  exchange_store    String[]
+  pay_bills         Boolean
+  cardId            String   @unique @db.ObjectId
+  Card              Card     @relation(fields: [cardId], references: [id])
+  pay_cashback      Boolean
+  other_options     String[]
+
+  @@map("mileages")
 }
