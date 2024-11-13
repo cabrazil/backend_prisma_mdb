@@ -7,6 +7,9 @@ import { ListAllZerofeesControler } from './controllers/ListAllZerofeesControler
 import { ListAllRewardsController } from './controllers/ListAllRewardsController';
 import { ListAllLoungesController } from './controllers/ListAllLoungesController';
 import { ListAllMileagesController } from './controllers/ListAllMileagesController';
+import { ListAllBrandsController } from './controllers/ListAllBrandsController';
+import { ListBrandByNameController } from './controllers/ListBrandByNameController';
+import { ListCardsByBrandController } from './controllers/ListCardsByBrandController';
 
 export async function routes(fastify: FastifyInstance, options: FastifyPluginOptions) {
 
@@ -44,5 +47,17 @@ export async function routes(fastify: FastifyInstance, options: FastifyPluginOpt
 
     fastify.get("/mileages", async (request: FastifyRequest, reply: FastifyReply) => {
         return new ListAllMileagesController().handle(request, reply)
+    })
+
+    fastify.get("/brands", async (request: FastifyRequest, reply: FastifyReply) => {
+        return new ListAllBrandsController().handle(request, reply)
+    })
+
+    fastify.get("/brandvar", async (request: FastifyRequest, reply: FastifyReply) => {
+        return new ListBrandByNameController().handle(request, reply)
+    })
+
+    fastify.get("/cardsbrand", async (request: FastifyRequest, reply: FastifyReply) => {
+        return new ListCardsByBrandController().handle(request, reply)
     })
 }

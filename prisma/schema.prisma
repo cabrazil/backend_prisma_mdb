@@ -24,10 +24,24 @@ model Customer {
   @@map("customers")
 }
 
+model Brand {
+  id               String    @id @default(auto()) @map("_id") @db.ObjectId
+  brand_name       String
+  variant_name     String
+  general_benefits String[]
+  isActive         Boolean
+  created_at       DateTime? @default(now())
+  updated_at       DateTime? @default(now())
+  site_info        String
+  cards            Card[]
+
+  @@map("brands")
+}
+
 model Card {
-  id                    String    @id @default(auto()) @map("_id") @db.ObjectId
-  created_at            DateTime? @default(now())
-  updated_at            DateTime? @default(now())
+  id                    String     @id @default(auto()) @map("_id") @db.ObjectId
+  created_at            DateTime?  @default(now())
+  updated_at            DateTime?  @default(now())
   card_name             String
   issuer                String
   annual_fee            Float
@@ -55,10 +69,14 @@ model Card {
   spread_rate           Float
   iof_rate              Float
   ranking_vip_lounges   Float
+  src_card_picture      String
   zerofees              ZeroFee[]
   rewards               Reward[]
   lounges               Lounge[]
   mileages              Mileage[]
+  exclusives            Exclusive?
+  brand                 Brand      @relation(fields: [brandId], references: [id])
+  brandId               String     @unique @db.ObjectId
 
   @@map("cards")
 }
@@ -119,4 +137,16 @@ model Mileage {
   other_options     String[]
 
   @@map("mileages")
+}
+
+model Exclusive {
+  id               String   @id @default(auto()) @map("_id") @db.ObjectId
+  tag_name         String
+  tag_amount       Int
+  exclusive_offers String[]
+  additional_info  String[]
+  cardId           String   @unique @db.ObjectId
+  Card             Card     @relation(fields: [cardId], references: [id])
+
+  @@map("exclusives")
 }

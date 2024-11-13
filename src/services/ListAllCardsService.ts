@@ -8,7 +8,9 @@ class ListAllCardsService {
                 zerofees: true,
                 rewards: true,
                 mileages: true,
-                lounges: true
+                lounges: true,
+                exclusives: true,
+                brand: true,
             },
             orderBy: {
                 issuer: 'desc',
