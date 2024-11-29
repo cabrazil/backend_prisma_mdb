@@ -11,9 +11,10 @@ class ListAllCardsService {
                 lounges: true,
                 exclusives: true,
                 brand: true,
+                issuer: true,
             },
             orderBy: {
-                issuer: 'desc',
+                issuer_name: 'desc',
             }
         });
 

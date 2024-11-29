@@ -1,0 +1,22 @@
+[
+  {
+    "issuer_name": "XP Investimentos",
+    "issuer_type": "Banco de Investimentos"
+  },
+  {
+    "issuer_name": "Nubank",
+    "issuer_type": "Banco Digital"
+  },
+  {
+    "issuer_name": "Itaú",
+    "issuer_type": "Banco Comercial"
+  },
+  {
+    "issuer_name": "C6 Bank",
+    "issuer_type": "Banco Digital"
+  },
+  {
+    "issuer_name": "Bradesco",
+    "issuer_type": "Banco Comercial"
+  }
+]

@@ -24,6 +24,16 @@ model Customer {
   @@map("customers")
 }
 
+model Issuer {
+  id          String    @id @default(auto()) @map("_id") @db.ObjectId
+  issuer_name String
+  issuer_type String
+  created_at  DateTime? @default(now())
+  cards       Card[]
+
+  @@map("issuers")
+}
+
 model Brand {
   id               String    @id @default(auto()) @map("_id") @db.ObjectId
   brand_name       String
@@ -43,7 +53,6 @@ model Card {
   created_at            DateTime?  @default(now())
   updated_at            DateTime?  @default(now())
   card_name             String
-  issuer                String
   annual_fee            Float
   card_brand            String
   category              String
@@ -70,6 +79,8 @@ model Card {
   iof_rate              Float
   ranking_vip_lounges   Float
   src_card_picture      String
+  segment               Segment    @default(ENTRADA)
+  issuer_name           String
   zerofees              ZeroFee[]
   rewards               Reward[]
   lounges               Lounge[]
@@ -77,6 +88,8 @@ model Card {
   exclusives            Exclusive?
   brand                 Brand      @relation(fields: [brandId], references: [id])
   brandId               String     @unique @db.ObjectId
+  issuer                Issuer     @relation(fields: [issuerId], references: [id])
+  issuerId              String     @unique @db.ObjectId
 
   @@map("cards")
 }
@@ -149,4 +162,10 @@ model Exclusive {
   Card             Card     @relation(fields: [cardId], references: [id])
 
   @@map("exclusives")
+}
+
+enum Segment {
+  ALTARENDA
+  INTERMEDIARIO
+  ENTRADA
 }
