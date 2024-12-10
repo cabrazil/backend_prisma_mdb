@@ -12,6 +12,7 @@ import { ListBrandByNameController } from './controllers/ListBrandByNameControll
 import { ListCardsByBrandController } from './controllers/ListCardsByBrandController';
 import { ListCardsBySegmentController } from './controllers/ListCardsBySegmentController';
 import { ListAllIssuersController } from './controllers/ListAllIssuersController';
+import { ListCardByIdController } from './controllers/ListCardbyIdController';
 
 export async function routes(fastify: FastifyInstance, options: FastifyPluginOptions) {
 
@@ -63,8 +64,12 @@ export async function routes(fastify: FastifyInstance, options: FastifyPluginOpt
         return new ListCardsByBrandController().handle(request, reply)
     })
 
-    fastify.get("/segment", async (request: FastifyRequest, reply: FastifyReply) => {
+    fastify.get("/cardsegment", async (request: FastifyRequest, reply: FastifyReply) => {
         return new ListCardsBySegmentController().handle(request, reply)
+    })
+
+    fastify.get("/cardid", async (request: FastifyRequest, reply: FastifyReply) => {
+        return new ListCardByIdController().handle(request, reply)
     })
 
     fastify.get("/issuers", async (request: FastifyRequest, reply: FastifyReply) => {

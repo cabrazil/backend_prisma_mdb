@@ -1,0 +1,130 @@
+<input id="instituicaoD0" type="checkbox" name="instituicao[]" value="3343">
+                                        <label for="instituicaoD0">Banco Bari</label>
+                                    </div>
+                                                                    <div class="item-checkbox " data-flex="align-center">
+                                        <input id="instituicaoD1" type="checkbox" name="instituicao[]" value="3408">
+                                        <label for="instituicaoD1">Banco BV</label>
+                                    </div>
+                                                                    <div class="item-checkbox " data-flex="align-center">
+                                        <input id="instituicaoD2" type="checkbox" name="instituicao[]" value="3324">
+                                        <label for="instituicaoD2">Banco do Brasil</label>
+                                    </div>
+                                                                    <div class="item-checkbox " data-flex="align-center">
+                                        <input id="instituicaoD3" type="checkbox" name="instituicao[]" value="3330">
+                                        <label for="instituicaoD3">Banco do Nordeste</label>
+                                    </div>
+                                                                    <div class="item-checkbox " data-flex="align-center">
+                                        <input id="instituicaoD4" type="checkbox" name="instituicao[]" value="3334">
+                                        <label for="instituicaoD4">Banco PAN</label>
+                                    </div>
+                                                                    <div class="item-checkbox hide" data-flex="align-center">
+                                        <input id="instituicaoD5" type="checkbox" name="instituicao[]" value="3328">
+                                        <label for="instituicaoD5">Banco Votorantim</label>
+                                    </div>
+                                                                    <div class="item-checkbox hide" data-flex="align-center">
+                                        <input id="instituicaoD6" type="checkbox" name="instituicao[]" value="3337">
+                                        <label for="instituicaoD6">Banese</label>
+                                    </div>
+                                                                    <div class="item-checkbox hide" data-flex="align-center">
+                                        <input id="instituicaoD7" type="checkbox" name="instituicao[]" value="3336">
+                                        <label for="instituicaoD7">Banpará</label>
+                                    </div>
+                                                                    <div class="item-checkbox hide" data-flex="align-center">
+                                        <input id="instituicaoD8" type="checkbox" name="instituicao[]" value="3323">
+                                        <label for="instituicaoD8">Banrisul</label>
+                                    </div>
+                                                                    <div class="item-checkbox hide" data-flex="align-center">
+                                        <input id="instituicaoD9" type="checkbox" name="instituicao[]" value="3317">
+                                        <label for="instituicaoD9">Bradesco</label>
+                                    </div>
+                                                                    <div class="item-checkbox hide" data-flex="align-center">
+                                        <input id="instituicaoD10" type="checkbox" name="instituicao[]" value="3327">
+                                        <label for="instituicaoD10">BRB</label>
+                                    </div>
+                                                                    <div class="item-checkbox hide" data-flex="align-center">
+                                        <input id="instituicaoD11" type="checkbox" name="instituicao[]" value="3340">
+                                        <label for="instituicaoD11">BTG</label>
+                                    </div>
+                                                                    <div class="item-checkbox hide" data-flex="align-center">
+                                        <input id="instituicaoD12" type="checkbox" name="instituicao[]" value="3326">
+                                        <label for="instituicaoD12">C6 Bank</label>
+                                    </div>
+                                                                    <div class="item-checkbox hide" data-flex="align-center">
+                                        <input id="instituicaoD13" type="checkbox" name="instituicao[]" value="3329">
+                                        <label for="instituicaoD13">Caixa Econômica Federal</label>
+                                    </div>
+                                                                    <div class="item-checkbox hide" data-flex="align-center">
+                                        <input id="instituicaoD14" type="checkbox" name="instituicao[]" value="3333">
+                                        <label for="instituicaoD14">Credicard</label>
+                                    </div>
+                                                                    <div class="item-checkbox hide" data-flex="align-center">
+                                        <input id="instituicaoD15" type="checkbox" name="instituicao[]" value="3459">
+                                        <label for="instituicaoD15">Cresol</label>
+                                    </div>
+                                                                    <div class="item-checkbox hide" data-flex="align-center">
+                                        <input id="instituicaoD16" type="checkbox" name="instituicao[]" value="3339">
+                                        <label for="instituicaoD16">Daycoval</label>
+                                    </div>
+                                                                    <div class="item-checkbox hide" data-flex="align-center">
+                                        <input id="instituicaoD17" type="checkbox" name="instituicao[]" value="3344">
+                                        <label for="instituicaoD17">digio</label>
+                                    </div>
+                                                                    <div class="item-checkbox hide" data-flex="align-center">
+                                        <input id="instituicaoD18" type="checkbox" name="instituicao[]" value="3321">
+                                        <label for="instituicaoD18">Inter</label>
+                                    </div>
+                                                                    <div class="item-checkbox hide" data-flex="align-center">
+                                        <input id="instituicaoD19" type="checkbox" name="instituicao[]" value="3332">
+                                        <label for="instituicaoD19">Itaú</label>
+                                    </div>
+                                                                    <div class="item-checkbox hide" data-flex="align-center">
+                                        <input id="instituicaoD20" type="checkbox" name="instituicao[]" value="3342">
+                                        <label for="instituicaoD20">modalmais</label>
+                                    </div>
+                                                                    <div class="item-checkbox hide" data-flex="align-center">
+                                        <input id="instituicaoD21" type="checkbox" name="instituicao[]" value="3325">
+                                        <label for="instituicaoD21">Nubank</label>
+                                    </div>
+                                                                    <div class="item-checkbox hide" data-flex="align-center">
+                                        <input id="instituicaoD22" type="checkbox" name="instituicao[]" value="3341">
+                                        <label for="instituicaoD22">Original</label>
+                                    </div>
+                                                                    <div class="item-checkbox hide" data-flex="align-center">
+                                        <input id="instituicaoD23" type="checkbox" name="instituicao[]" value="3409">
+                                        <label for="instituicaoD23">PicPay</label>
+                                    </div>
+                                                                    <div class="item-checkbox hide" data-flex="align-center">
+                                        <input id="instituicaoD24" type="checkbox" name="instituicao[]" value="3318">
+                                        <label for="instituicaoD24">Porto Seguro</label>
+                                    </div>
+                                                                    <div class="item-checkbox hide" data-flex="align-center">
+                                        <input id="instituicaoD25" type="checkbox" name="instituicao[]" value="3434">
+                                        <label for="instituicaoD25">RappiBank</label>
+                                    </div>
+                                                                    <div class="item-checkbox hide" data-flex="align-center">
+                                        <input id="instituicaoD26" type="checkbox" name="instituicao[]" value="3335">
+                                        <label for="instituicaoD26">Safra</label>
+                                    </div>
+                                                                    <div class="item-checkbox hide" data-flex="align-center">
+                                        <input id="instituicaoD27" type="checkbox" name="instituicao[]" value="3316">
+                                        <label for="instituicaoD27">Santander</label>
+                                    </div>
+                                                                    <div class="item-checkbox hide" data-flex="align-center">
+                                        <input id="instituicaoD28" type="checkbox" name="instituicao[]" value="3319">
+                                        <label for="instituicaoD28">Sicoob</label>
+                                    </div>
+                                                                    <div class="item-checkbox hide" data-flex="align-center">
+                                        <input id="instituicaoD29" type="checkbox" name="instituicao[]" value="3322">
+                                        <label for="instituicaoD29">Sicredi</label>
+                                    </div>
+                                                                    <div class="item-checkbox hide" data-flex="align-center">
+                                        <input id="instituicaoD30" type="checkbox" name="instituicao[]" value="3320">
+                                        <label for="instituicaoD30">Unicred</label>
+                                    </div>
+                                                                    <div class="item-checkbox hide" data-flex="align-center">
+                                        <input id="instituicaoD31" type="checkbox" name="instituicao[]" value="3331">
+                                        <label for="instituicaoD31">Uniprime</label>
+                                    </div>
+                                                                    <div class="item-checkbox hide" data-flex="align-center">
+                                        <input id="instituicaoD32" type="checkbox" name="instituicao[]" value="3338">
+                                        <label for="instituicaoD32">XP Investimentos</label>
