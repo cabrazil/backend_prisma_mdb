@@ -115,6 +115,7 @@ model Reward {
   rules             String
   points_limit      Int
   expiration        Boolean
+  notes             String
   cardId            String  @unique @db.ObjectId
   Card              Card    @relation(fields: [cardId], references: [id])
 
