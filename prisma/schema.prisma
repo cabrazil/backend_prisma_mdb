@@ -70,7 +70,7 @@ model Card {
   spread_on             String
   cashback              String
   obs_add_cards         String
-  obs_cashback          String
+  obs_cashback          String[]
   account_holder        Boolean
   international_card    Boolean
   card_modality         String
@@ -129,6 +129,7 @@ model Lounge {
   int_airport  String
   access_limit String
   conditions   String
+  ispaid       Boolean  @default(false)
   cardId       String   @unique @db.ObjectId
   Card         Card     @relation(fields: [cardId], references: [id])
 
