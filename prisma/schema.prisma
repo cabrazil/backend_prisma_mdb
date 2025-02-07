@@ -81,6 +81,10 @@ model Card {
   src_card_picture      String
   segment               Segment    @default(ENTRADA)
   issuer_name           String
+  points_expire         Boolean    @default(false)
+  obs_system_points     String[]
+  virtual_cards         Boolean
+  points_accelerator    Boolean    @default(false)
   zerofees              ZeroFee[]
   rewards               Reward[]
   lounges               Lounge[]
