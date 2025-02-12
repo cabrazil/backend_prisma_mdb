@@ -1,18 +1,18 @@
 import { FastifyInstance, FastifyPluginOptions, FastifyRequest, FastifyReply } from 'fastify';
-import { CreateCustomerController } from './controllers/CreateCustomerController';
-import { ListCustomersController } from './controllers/ListCustomersController';
-import { DeleteCustomerController } from './controllers/DeleteCustomerController';
-import { ListAllCardsController } from './controllers/ListAllCardsController'
-import { ListAllZerofeesControler } from './controllers/ListAllZerofeesControler';
-import { ListAllRewardsController } from './controllers/ListAllRewardsController';
-import { ListAllLoungesController } from './controllers/ListAllLoungesController';
-import { ListAllMileagesController } from './controllers/ListAllMileagesController';
-import { ListAllBrandsController } from './controllers/ListAllBrandsController';
-import { ListBrandByNameController } from './controllers/ListBrandByNameController';
-import { ListCardsByBrandController } from './controllers/ListCardsByBrandController';
-import { ListCardsBySegmentController } from './controllers/ListCardsBySegmentController';
-import { ListAllIssuersController } from './controllers/ListAllIssuersController';
-import { ListCardByIdController } from './controllers/ListCardbyIdController';
+import { CreateCustomerController } from '../controllers/CreateCustomerController';
+import { ListCustomersController } from '../controllers/ListCustomersController';
+import { DeleteCustomerController } from '../controllers/DeleteCustomerController';
+import { ListAllCardsController } from '../controllers/ListAllCardsController'
+import { ListAllZerofeesControler } from '../controllers/ListAllZerofeesControler';
+import { ListAllRewardsController } from '../controllers/ListAllRewardsController';
+import { ListAllLoungesController } from '../controllers/ListAllLoungesController';
+import { ListAllMileagesController } from '../controllers/ListAllMileagesController';
+import { ListAllBrandsController } from '../controllers/ListAllBrandsController';
+import { ListBrandByNameController } from '../controllers/ListBrandByNameController';
+import { ListCardsByBrandController } from '../controllers/ListCardsByBrandController';
+import { ListCardsBySegmentController } from '../controllers/ListCardsBySegmentController';
+import { ListAllIssuersController } from '../controllers/ListAllIssuersController';
+import { ListCardByIdController } from '../controllers/ListCardbyIdController';
 
 export async function routes(fastify: FastifyInstance, options: FastifyPluginOptions) {
 

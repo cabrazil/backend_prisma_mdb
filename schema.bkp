@@ -105,3 +105,10 @@ model ZeroFee {
 
   @@map("zerofees")
 }
+
+{ id, created_at, updated_at, card_name, annual_fee, card_brand, category, card_limit,
+      ranking_points, ranking_benefits, ranking_annuity, ranking_miles_program, virtual_wallets,
+      add_cards_amount, add_cards_charge, card_material, contactless, get_conditions, spread_on,
+      cashback, obs_add_cards, obs_cashback, account_holder, international_card, card_modality,
+      vip_lounge_app, spread_rate, iof_rate, ranking_vip_lounges, src_card_picture, segment,
+      issuer_name, points_expire, obs_system_points, virtual_cards, points_accelerator, brandId, issuerId }

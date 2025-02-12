@@ -1,5 +1,8 @@
 import Fastify from 'fastify';
-import { routes } from './routes';
+import { routes } from './routes/routes';
+import cardRoutes from './routes/cardRoutes';
+import loungeRoutes from './routes/loungeRoutes';
+import rewardRoutes from './routes/rewardRoutes';
 import cors from '@fastify/cors';
 import { error } from 'console';
 
@@ -13,9 +16,13 @@ const start = async () => {
 
     await app.register(cors);
     await app.register(routes);
+    await app.register(cardRoutes);
+    await app.register(loungeRoutes);
+    await app.register(rewardRoutes);
 
     try {
         await app.listen({ port: 3333 })
+        console.log("🚀 Server running on http://localhost:3333");
     } catch (error) {
         process.exit(1)
     }
