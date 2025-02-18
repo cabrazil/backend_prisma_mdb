@@ -89,6 +89,7 @@ model Card {
   rewards               Reward[]
   lounges               Lounge[]
   mileages              Mileage[]
+  cashbacks             Cashback[]
   exclusives            Exclusive?
   brand                 Brand      @relation(fields: [brandId], references: [id])
   brandId               String     @unique @db.ObjectId
@@ -107,12 +108,25 @@ model ZeroFee {
   Card           Card     @relation(fields: [CardId], references: [id])
   CardId         String   @unique @db.ObjectId
   get_conditions String[]
+  fee_tips       String[]
 
   @@map("zerofees")
 }
 
+model Cashback {
+  id           String   @id @default(auto()) @map("_id") @db.ObjectId
+  pct_cashback Float
+  txt_cashback String
+  obs_cashback String[]
+  cardId       String   @unique @db.ObjectId
+  Card         Card     @relation(fields: [cardId], references: [id])
+  cash_tips    String[]
+
+  @@map("cashbacks")
+}
+
 model Reward {
-  id                String  @id @default(auto()) @map("_id") @db.ObjectId
+  id                String   @id @default(auto()) @map("_id") @db.ObjectId
   expenses          String
   points_per_dollar Float
   points_per_real   Float
@@ -120,8 +134,9 @@ model Reward {
   points_limit      Int
   expiration        Boolean
   notes             String
-  cardId            String  @unique @db.ObjectId
-  Card              Card    @relation(fields: [cardId], references: [id])
+  cardId            String   @unique @db.ObjectId
+  Card              Card     @relation(fields: [cardId], references: [id])
+  reward_tips       String[]
 
   @@map("rewards")
 }
@@ -136,6 +151,7 @@ model Lounge {
   ispaid       Boolean  @default(false)
   cardId       String   @unique @db.ObjectId
   Card         Card     @relation(fields: [cardId], references: [id])
+  vip_tips     String[]
 
   @@map("lounges")
 }
@@ -154,6 +170,7 @@ model Mileage {
   Card              Card     @relation(fields: [cardId], references: [id])
   pay_cashback      Boolean
   other_options     String[]
+  mile_tips         String[]
 
   @@map("mileages")
 }

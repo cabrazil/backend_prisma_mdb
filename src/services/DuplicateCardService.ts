@@ -4,7 +4,7 @@ const prisma = new PrismaClient();
 
 export const duplicateCard = async (cardId: string, newBrandId?: string, newIssuerId?: string) => {
   try {
-    // Fetch the existing cardnewIssuerId
+    // Fetch the existing card
     console.log(`🔍 Fetching card with ID: ${cardId}`);
     const existingCard = await prisma.card.findUnique({
       where: { id: cardId },

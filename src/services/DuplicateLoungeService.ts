@@ -4,7 +4,7 @@ const prisma = new PrismaClient();
 
 export const duplicateLoungeService = async (loungeId: string, newCardId: string) => {
   try {
-    // Fetch the existing loungenewIssuerId
+    // Fetch the existing lounge
     console.log(`🔍 Fetching lounge with ID: ${loungeId}`);
     const existinglounge = await prisma.lounge.findUnique({
       where: { id: loungeId },
@@ -24,7 +24,7 @@ export const duplicateLoungeService = async (loungeId: string, newCardId: string
     const newlounge = await prisma.lounge.create({
       data: {
         ...newloungeData,
-        cardId: newCardId, // Use the provided brandId or keep the original
+        cardId: newCardId,
       },
     });
 
