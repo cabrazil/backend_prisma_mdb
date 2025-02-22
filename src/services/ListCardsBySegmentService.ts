@@ -15,6 +15,7 @@ class ListCardsBySegmentService {
     const cardsSegment = await prismaClient.card.findMany({
       include: {
         zerofees: true,
+        cashbacks: true,
         rewards: true,
         mileages: true,
         lounges: true,

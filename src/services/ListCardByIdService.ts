@@ -14,6 +14,7 @@ class ListCardByIdService {
     const cardId = await prismaClient.card.findFirst({
       include: {
         zerofees: true,
+        cashbacks: true,
         rewards: true,
         mileages: true,
         lounges: true,
