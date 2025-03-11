@@ -70,7 +70,6 @@ model Card {
   spread_on             String
   cashback              String
   obs_add_cards         String
-  obs_cashback          String[]
   account_holder        Boolean
   international_card    Boolean
   card_modality         String
@@ -85,6 +84,8 @@ model Card {
   obs_system_points     String[]
   virtual_cards         Boolean
   points_accelerator    Boolean    @default(false)
+  obs_summary           String[]
+  expense_code          Float
   zerofees              ZeroFee[]
   rewards               Reward[]
   lounges               Lounge[]
