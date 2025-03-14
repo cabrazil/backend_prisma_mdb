@@ -49,9 +49,9 @@ model Brand {
 }
 
 model Card {
-  id                    String     @id @default(auto()) @map("_id") @db.ObjectId
-  created_at            DateTime?  @default(now())
-  updated_at            DateTime?  @default(now())
+  id                    String       @id @default(auto()) @map("_id") @db.ObjectId
+  created_at            DateTime?    @default(now())
+  updated_at            DateTime?    @default(now())
   card_name             String
   annual_fee            Float
   card_brand            String
@@ -78,24 +78,27 @@ model Card {
   iof_rate              Float
   ranking_vip_lounges   Float
   src_card_picture      String
-  segment               Segment    @default(ENTRADA)
+  segment               Segment      @default(ENTRADA)
   issuer_name           String
-  points_expire         Boolean    @default(false)
+  points_expire         Boolean      @default(false)
   obs_system_points     String[]
   virtual_cards         Boolean
-  points_accelerator    Boolean    @default(false)
+  points_accelerator    Boolean      @default(false)
   obs_summary           String[]
   expense_code          Float
+  additional_info       String[]
+  is_debit              Boolean      @default(false)
   zerofees              ZeroFee[]
   rewards               Reward[]
   lounges               Lounge[]
   mileages              Mileage[]
   cashbacks             Cashback[]
   exclusives            Exclusive?
-  brand                 Brand      @relation(fields: [brandId], references: [id])
-  brandId               String     @unique @db.ObjectId
-  issuer                Issuer     @relation(fields: [issuerId], references: [id])
-  issuerId              String     @unique @db.ObjectId
+  requirements          Requirement?
+  brand                 Brand        @relation(fields: [brandId], references: [id])
+  brandId               String       @unique @db.ObjectId
+  issuer                Issuer       @relation(fields: [issuerId], references: [id])
+  issuerId              String       @unique @db.ObjectId
 
   @@map("cards")
 }
@@ -186,6 +189,22 @@ model Exclusive {
   Card             Card     @relation(fields: [cardId], references: [id])
 
   @@map("exclusives")
+}
+
+model Requirement {
+  id               String   @id @default(auto()) @map("_id") @db.ObjectId
+  account_holder   Boolean  @default(true)
+  add_cards_amount Int
+  obs_add_cards    String
+  add_cards_charge Int
+  card_limit       String
+  get_conditions   String[]
+  notes            String[]
+  req_tips         String[]
+  cardId           String   @unique @db.ObjectId
+  Card             Card     @relation(fields: [cardId], references: [id])
+
+  @@map("requirements")
 }
 
 enum Segment {

@@ -7,6 +7,7 @@ import mileageRoutes from './routes/mileageRoutes';
 import zerofeeRoutes from './routes/zerofeeRoutes';
 import exclusiveRoutes from './routes/exclusiveRoutes';
 import cashbackRoutes from './routes/cashbackRoutes';
+import requirementRoutes from './routes/requirementRoutes';
 import cors from '@fastify/cors';
 import { error } from 'console';
 
@@ -27,6 +28,7 @@ const start = async () => {
     await app.register(zerofeeRoutes);
     await app.register(exclusiveRoutes);
     await app.register(cashbackRoutes);
+    await app.register(requirementRoutes);
 
     try {
         await app.listen({ port: 3333 })

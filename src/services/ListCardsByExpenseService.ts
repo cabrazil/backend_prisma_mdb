@@ -25,6 +25,7 @@ class ListCardsByExpenseService {
         mileages: true,
         lounges: true,
         exclusives: true,
+        requirements: true,
         brand: true,
         issuer: true,
       },
