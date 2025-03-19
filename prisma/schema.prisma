@@ -56,21 +56,15 @@ model Card {
   annual_fee            Float
   card_brand            String
   category              String
-  card_limit            String
   ranking_points        Int
   ranking_benefits      Int
   ranking_annuity       Int
   ranking_miles_program Int
   virtual_wallets       String[]
-  add_cards_amount      Float
-  add_cards_charge      Float
   card_material         String?
   contactless           Boolean?
-  get_conditions        String[]
   spread_on             String
   cashback              String
-  obs_add_cards         String
-  account_holder        Boolean
   international_card    Boolean
   card_modality         String
   vip_lounge_app        String
