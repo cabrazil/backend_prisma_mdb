@@ -3,5 +3,6 @@
     "api/index.ts": {
       "maxDuration": 60
     }
-  }
+  },
+  "outputDirectory": "."
 } 
