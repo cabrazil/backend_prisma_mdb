@@ -6,7 +6,7 @@
     "dev": "tsx watch src/server.ts",
     "build": "tsc",
     "start": "tsx src/server.ts",
-    "vercel-build": "prisma generate && tsc"
+    "vercel-build": "tsc"
   },
   "keywords": [],
   "author": "",
