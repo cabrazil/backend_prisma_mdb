@@ -9,17 +9,22 @@ import exclusiveRoutes from './routes/exclusiveRoutes';
 import cashbackRoutes from './routes/cashbackRoutes';
 import requirementRoutes from './routes/requirementRoutes';
 import cors from '@fastify/cors';
-import { error } from 'console';
 
-const app = Fastify({ logger: true })
+// Configuração otimizada para Vercel
+const app = Fastify({ 
+  logger: process.env.NODE_ENV !== 'production' 
+})
 
 app.setErrorHandler((error, request, reply) => {
     reply.code(400).send({ message: error.message })
 })
 
-const start = async () => {
-
-    await app.register(cors);
+// Função para registrar rotas (otimizada para cold start)
+const registerRoutes = async () => {
+    await app.register(cors, {
+      origin: true,
+      credentials: true
+    });
     await app.register(routes);
     await app.register(cardRoutes);
     await app.register(loungeRoutes);
@@ -29,6 +34,10 @@ const start = async () => {
     await app.register(exclusiveRoutes);
     await app.register(cashbackRoutes);
     await app.register(requirementRoutes);
+}
+
+const start = async () => {
+    await registerRoutes();
 
     try {
         const port = process.env.PORT || 3333;
@@ -37,6 +46,7 @@ const start = async () => {
         await app.listen({ port: Number(port), host })
         console.log(`🚀 Server running on http://${host}:${port}`);
     } catch (error) {
+        console.error('Server startup failed:', error);
         process.exit(1)
     }
 }
@@ -46,5 +56,7 @@ if (process.env.NODE_ENV !== 'production') {
     start();
 }
 
-// Para Vercel
+// Para Vercel - registrar rotas imediatamente
+registerRoutes().catch(console.error);
+
 export default app;
