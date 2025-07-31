@@ -42,7 +42,7 @@ interface RouteConfig {
 // Route definitions
 const routes: RouteConfig[] = [
   // Test route
-  { method: 'get', url: '/teste', handler: (_, reply) => reply.send({ ok: true }) },
+  { method: 'get', url: '/teste', handler: async (_, reply) => reply.send({ ok: true }) },
 
   // Customer routes
   { method: 'post', url: '/customers', handler: new CreateCustomerController().handle },

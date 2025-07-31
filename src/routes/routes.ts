@@ -37,3 +37,6 @@ export async function routes(fastify: FastifyInstance, options: FastifyPluginOpt
         return new ListAllIssuersController().handle(request, reply)
     })
 }
+
+// Export default for easier importing
+export default routes;
