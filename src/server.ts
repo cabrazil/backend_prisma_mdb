@@ -3,7 +3,7 @@ import { routes } from './routes/routes';
 import cardRoutes from './routes/cardRoutes';
 import cors from '@fastify/cors';
 
-// Configuração otimizada para Vercel
+// Configuração otimizada para Vercel - Deploy Test2
 const app = Fastify({ 
   logger: process.env.NODE_ENV !== 'production' 
 })
