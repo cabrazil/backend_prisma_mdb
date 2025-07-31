@@ -1,6 +1,6 @@
-# Backend API
+# Cards Backend API
 
-API backend construída com Fastify, TypeScript e Prisma.
+API backend para sistema de cartões de crédito, construída com Fastify, TypeScript e Prisma.
 
 ## Deploy na Vercel
 
@@ -81,7 +81,7 @@ npm start
 ### URLs da API
 
 Após o deploy, sua API estará disponível em:
-- `https://seu-projeto.vercel.app`
+- `https://cards-backend.vercel.app`
 
 ### Observações Importantes
 
