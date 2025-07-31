@@ -1,28 +1,19 @@
 import Fastify from 'fastify';
-import { routes } from './routes/routes';
-import cardRoutes from './routes/cardRoutes';
-import cors from '@fastify/cors';
 
-// Configuração otimizada para Vercel
+// Configuração mínima para Vercel
 const app = Fastify({ 
-  logger: false, // Desabilitar logger em produção para melhor performance
-  trustProxy: true // Necessário para Vercel
+  logger: true,
+  trustProxy: true
 })
 
-app.setErrorHandler((error, request, reply) => {
-    console.error('Server error:', error);
-    reply.code(500).send({ message: 'Internal server error' })
+// Health check básico
+app.get('/', async (request, reply) => {
+  return { status: 'ok', message: 'Server is running', timestamp: new Date().toISOString() }
 })
 
-// Registrar CORS
-app.register(cors, {
-  origin: true,
-  credentials: true
-});
+app.get('/teste', async (request, reply) => {
+  return { ok: true, message: 'Test endpoint working' }
+})
 
-// Registrar rotas
-app.register(routes);
-app.register(cardRoutes);
-
-// Para Vercel - não iniciar automaticamente
+// Para Vercel
 export default app;
