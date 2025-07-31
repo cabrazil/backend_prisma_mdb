@@ -3,13 +3,15 @@ import { routes } from './routes/routes';
 import cardRoutes from './routes/cardRoutes';
 import cors from '@fastify/cors';
 
-// Configuração otimizada para Vercel - Deploy Test2
+// Configuração otimizada para Vercel
 const app = Fastify({ 
-  logger: process.env.NODE_ENV !== 'production' 
+  logger: false, // Desabilitar logger em produção para melhor performance
+  trustProxy: true // Necessário para Vercel
 })
 
 app.setErrorHandler((error, request, reply) => {
-    reply.code(400).send({ message: error.message })
+    console.error('Server error:', error);
+    reply.code(500).send({ message: 'Internal server error' })
 })
 
 // Registrar CORS
@@ -18,32 +20,9 @@ app.register(cors, {
   credentials: true
 });
 
-// Registrar apenas as rotas essenciais primeiro
-const registerEssentialRoutes = async () => {
-    await app.register(routes);
-    await app.register(cardRoutes);
-}
+// Registrar rotas
+app.register(routes);
+app.register(cardRoutes);
 
-const start = async () => {
-    try {
-        // Registrar rotas essenciais primeiro
-        await registerEssentialRoutes();
-        
-        const port = process.env.PORT || 3333;
-        const host = process.env.VERCEL ? '0.0.0.0' : 'localhost';
-        
-        await app.listen({ port: Number(port), host })
-        console.log(`🚀 Server running on http://${host}:${port}`);
-    } catch (error) {
-        console.error('Server startup failed:', error);
-        process.exit(1)
-    }
-}
-
-// Para desenvolvimento local
-if (process.env.NODE_ENV !== 'production') {
-    start();
-}
-
-// Para Vercel
+// Para Vercel - não iniciar automaticamente
 export default app;

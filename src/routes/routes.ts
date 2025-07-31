@@ -9,6 +9,11 @@ import { ListAllIssuersController } from '../controllers/ListAllIssuersControlle
 
 export async function routes(fastify: FastifyInstance, options: FastifyPluginOptions) {
 
+    // Health check simples
+    fastify.get("/", async (request: FastifyRequest, reply: FastifyReply) => {
+        return { status: "ok", message: "Server is running" }
+    })
+
     fastify.get("/teste", async (request: FastifyRequest, reply: FastifyReply) => {
         return { ok: true }
     })
