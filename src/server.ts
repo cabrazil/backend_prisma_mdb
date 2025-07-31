@@ -31,11 +31,20 @@ const start = async () => {
     await app.register(requirementRoutes);
 
     try {
-        await app.listen({ port: 3333 })
-        console.log("🚀 Server running on http://localhost:3333");
+        const port = process.env.PORT || 3333;
+        const host = process.env.VERCEL ? '0.0.0.0' : 'localhost';
+        
+        await app.listen({ port: Number(port), host })
+        console.log(`🚀 Server running on http://${host}:${port}`);
     } catch (error) {
         process.exit(1)
     }
 }
 
-start();
+// Para desenvolvimento local
+if (process.env.NODE_ENV !== 'production') {
+    start();
+}
+
+// Para Vercel
+export default app;
