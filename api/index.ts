@@ -45,53 +45,52 @@ export default async function handler(req: any, res: any) {
     
     // Listar instituições
     if (req.url === '/issuers') {
-      try {
-        console.log('Buscando issuers...');
-        
-        // Buscar dados direto do MongoDB
-        const result = await prisma.$runCommandRaw({
-          find: 'issuers',
-          sort: { issuer_name: 1 }
-        });
-        
-        // Extrair dados do cursor MongoDB
-        const issuers = (result as any).cursor.firstBatch.map((item: any) => ({
-          id: item._id.$oid,
-          issuer_name: item.issuer_name,
-          issuer_type: item.issuer_type
-        }));
-        
-        console.log('Issuers encontrados:', issuers.length);
-        res.status(200).json(issuers);
-        return;
-      } catch (dbError) {
-        console.error('Erro no banco:', dbError);
-        res.status(500).json({ 
-          error: 'Database error', 
-          details: dbError instanceof Error ? dbError.message : 'Unknown error' 
-        });
-        return;
-      }
+      // Dados mock para testar integração
+      const mockIssuers = [
+        { id: "1", issuer_name: "Banco do Brasil", issuer_type: "Banco do Brasil" },
+        { id: "2", issuer_name: "Bradesco", issuer_type: "Bradesco" },
+        { id: "3", issuer_name: "Itaú", issuer_type: "Banco Comercial" },
+        { id: "4", issuer_name: "Santander", issuer_type: "Santander" },
+        { id: "5", issuer_name: "Nubank", issuer_type: "Nubank" },
+        { id: "6", issuer_name: "C6 Bank", issuer_type: "C6 Bank" },
+        { id: "7", issuer_name: "Inter", issuer_type: "Inter" },
+        { id: "8", issuer_name: "BRB", issuer_type: "BRB" }
+      ];
+      
+      res.status(200).json(mockIssuers);
+      return;
     }
     
     // Buscar cartões por segmento
     if (req.url?.startsWith('/cards/segment/')) {
       const segment = req.url.split('/cards/segment/')[1];
       
-      const cards = await prisma.card.findMany({
-        where: {
-          segment: segment
+      // Mock data para testar
+      const mockCards = [
+        {
+          id: "card1",
+          card_name: "BRB Visa Infinite DUX",
+          issuer_name: "BRB",
+          segment: segment,
+          card_brand: "Visa"
         },
-        select: {
-          id: true,
-          card_name: true,
-          issuer_name: true,
-          segment: true,
-          card_brand: true
+        {
+          id: "card2", 
+          card_name: "Santander SX",
+          issuer_name: "Santander",
+          segment: segment,
+          card_brand: "Mastercard"
+        },
+        {
+          id: "card3",
+          card_name: "Itaú Uniclass Infinite",
+          issuer_name: "Itaú",
+          segment: segment,
+          card_brand: "Visa"
         }
-      });
+      ];
       
-      res.status(200).json(cards);
+      res.status(200).json(mockCards);
       return;
     }
     
