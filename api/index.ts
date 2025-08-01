@@ -25,6 +25,15 @@ export default async function handler(req: any, res: any) {
       return;
     }
     
+    if (req.url === '/test-env') {
+      res.status(200).json({ 
+        hasDatabase: !!process.env.DATABASE_URL,
+        nodeEnv: process.env.NODE_ENV,
+        databaseUrlLength: process.env.DATABASE_URL?.length || 0
+      });
+      return;
+    }
+    
     if (req.url === '/') {
       res.status(200).json({ 
         status: 'ok', 
@@ -36,19 +45,33 @@ export default async function handler(req: any, res: any) {
     
     // Listar instituições
     if (req.url === '/issuers') {
-      const issuers = await prisma.issuers.findMany({
-        select: {
-          id: true,
-          issuer_name: true,
-          issuer_type: true
-        },
-        orderBy: {
-          issuer_name: 'asc'
-        }
-      });
-      
-      res.status(200).json(issuers);
-      return;
+      try {
+        console.log('Buscando issuers...');
+        
+        // Buscar dados direto do MongoDB
+        const result = await prisma.$runCommandRaw({
+          find: 'issuers',
+          sort: { issuer_name: 1 }
+        });
+        
+        // Extrair dados do cursor MongoDB
+        const issuers = (result as any).cursor.firstBatch.map((item: any) => ({
+          id: item._id.$oid,
+          issuer_name: item.issuer_name,
+          issuer_type: item.issuer_type
+        }));
+        
+        console.log('Issuers encontrados:', issuers.length);
+        res.status(200).json(issuers);
+        return;
+      } catch (dbError) {
+        console.error('Erro no banco:', dbError);
+        res.status(500).json({ 
+          error: 'Database error', 
+          details: dbError instanceof Error ? dbError.message : 'Unknown error' 
+        });
+        return;
+      }
     }
     
     // Buscar cartões por segmento
