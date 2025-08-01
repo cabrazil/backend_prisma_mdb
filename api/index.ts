@@ -78,16 +78,16 @@ export default async function handler(req: any, res: any) {
     if (req.url?.startsWith('/cards/segment/')) {
       const segment = req.url.split('/cards/segment/')[1];
       
-      const cards = await prisma.creditcards.findMany({
+      const cards = await prisma.card.findMany({
         where: {
-          expense_segment: segment
+          segment: segment
         },
         select: {
           id: true,
           card_name: true,
           issuer_name: true,
-          expense_segment: true,
-          brand: true
+          segment: true,
+          card_brand: true
         }
       });
       
@@ -99,19 +99,18 @@ export default async function handler(req: any, res: any) {
     if (req.url?.startsWith('/cards/')) {
       const cardId = req.url.split('/cards/')[1];
       
-      const card = await prisma.creditcards.findUnique({
+      const card = await prisma.card.findUnique({
         where: {
           id: cardId
         },
         include: {
           requirements: true,
-          zerofee: true,
+          zerofees: true,
           rewards: true,
           mileages: true,
-          cashback: true,
-          viplounge: true,
-          cardbenefits: true,
-          brandbenefits: true
+          cashbacks: true,
+          lounges: true,
+          exclusives: true
         }
       });
       
