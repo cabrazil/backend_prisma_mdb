@@ -178,23 +178,31 @@ export default async function handler(req: any, res: any) {
         console.log('Buscando detalhes do cartão (endpoint antigo):', cardId);
         
         // Buscar cartão direto do MongoDB
-        const result = await prisma.$runCommandRaw({
-          find: 'cards',
-          filter: { _id: { $oid: cardId } }
+                const card = await prisma.card.findUnique({
+          where: { id: cardId },
+          include: {
+            brand: true,
+            issuer: true,
+            zerofees: true,
+            cashbacks: true,
+            rewards: true,
+            mileages: true,
+            lounges: true,
+            exclusives: true,
+            requirements: true
+          }
         });
-        
-        if ((result as any).cursor.firstBatch.length === 0) {
+
+        if (!card) {
           res.status(404).json({ error: 'Card not found' });
           return;
         }
         
-        const card = (result as any).cursor.firstBatch[0];
-        
-        // Estrutura completa esperada pelo frontend
+        // Estrutura completa esperada pelo frontend usando dados do Prisma
         const cardDetails = {
-          id: card._id.$oid,
-          created_at: card.created_at || new Date().toISOString(),
-          updated_at: card.updated_at || new Date().toISOString(),
+          id: card.id,
+          created_at: card.created_at?.toISOString() || new Date().toISOString(),
+          updated_at: card.updated_at?.toISOString() || new Date().toISOString(),
           card_name: card.card_name,
           annual_fee: card.annual_fee || 0,
           card_brand: card.card_brand,
@@ -291,23 +299,31 @@ export default async function handler(req: any, res: any) {
         console.log('Buscando detalhes do cartão:', cardId);
         
         // Buscar cartão direto do MongoDB
-        const result = await prisma.$runCommandRaw({
-          find: 'cards',
-          filter: { _id: { $oid: cardId } }
+                const card = await prisma.card.findUnique({
+          where: { id: cardId },
+          include: {
+            brand: true,
+            issuer: true,
+            zerofees: true,
+            cashbacks: true,
+            rewards: true,
+            mileages: true,
+            lounges: true,
+            exclusives: true,
+            requirements: true
+          }
         });
-        
-        if ((result as any).cursor.firstBatch.length === 0) {
+
+        if (!card) {
           res.status(404).json({ error: 'Card not found' });
           return;
         }
         
-        const card = (result as any).cursor.firstBatch[0];
-        
-        // Estrutura completa esperada pelo frontend
+        // Estrutura completa esperada pelo frontend usando dados do Prisma
         const cardDetails = {
-          id: card._id.$oid,
-          created_at: card.created_at || new Date().toISOString(),
-          updated_at: card.updated_at || new Date().toISOString(),
+          id: card.id,
+          created_at: card.created_at?.toISOString() || new Date().toISOString(),
+          updated_at: card.updated_at?.toISOString() || new Date().toISOString(),
           card_name: card.card_name,
           annual_fee: card.annual_fee || 0,
           card_brand: card.card_brand,
