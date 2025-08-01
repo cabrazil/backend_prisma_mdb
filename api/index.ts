@@ -78,61 +78,88 @@ export default async function handler(req: any, res: any) {
     if (req.url?.startsWith('/cards/segment/')) {
       const segment = req.url.split('/cards/segment/')[1];
       
-      // Mock data para testar
-      const mockCards = [
-        {
-          id: "card1",
-          card_name: "BRB Visa Infinite DUX",
-          issuer_name: "BRB",
-          segment: segment,
-          card_brand: "Visa"
-        },
-        {
-          id: "card2", 
-          card_name: "Santander SX",
-          issuer_name: "Santander",
-          segment: segment,
-          card_brand: "Mastercard"
-        },
-        {
-          id: "card3",
-          card_name: "Itaú Uniclass Infinite",
-          issuer_name: "Itaú",
-          segment: segment,
-          card_brand: "Visa"
-        }
-      ];
-      
-      res.status(200).json(mockCards);
-      return;
+      try {
+        console.log('Buscando cartões por segmento:', segment);
+        
+        // Buscar cartões direto do MongoDB
+        const result = await prisma.$runCommandRaw({
+          find: 'cards',
+          filter: { segment: segment }
+        });
+        
+        // Extrair dados do cursor MongoDB
+        const cards = (result as any).cursor.firstBatch.map((item: any) => ({
+          id: item._id.$oid,
+          card_name: item.card_name,
+          issuer_name: item.issuer_name,
+          segment: item.segment,
+          card_brand: item.card_brand,
+          annual_fee: item.annual_fee
+        }));
+        
+        console.log('Cartões encontrados:', cards.length);
+        res.status(200).json(cards);
+        return;
+      } catch (dbError) {
+        console.error('Erro ao buscar cartões:', dbError);
+        res.status(500).json({ 
+          error: 'Database error', 
+          details: dbError instanceof Error ? dbError.message : 'Unknown error' 
+        });
+        return;
+      }
     }
     
     // Detalhes do cartão
     if (req.url?.startsWith('/cards/')) {
       const cardId = req.url.split('/cards/')[1];
       
-      const card = await prisma.card.findUnique({
-        where: {
-          id: cardId
-        },
-        include: {
-          requirements: true,
-          zerofees: true,
-          rewards: true,
-          mileages: true,
-          cashbacks: true,
-          lounges: true,
-          exclusives: true
+      try {
+        console.log('Buscando detalhes do cartão:', cardId);
+        
+        // Buscar cartão direto do MongoDB
+        const result = await prisma.$runCommandRaw({
+          find: 'cards',
+          filter: { _id: { $oid: cardId } }
+        });
+        
+        if ((result as any).cursor.firstBatch.length === 0) {
+          res.status(404).json({ error: 'Card not found' });
+          return;
         }
-      });
-      
-      if (!card) {
-        res.status(404).json({ error: 'Card not found' });
+        
+        const card = (result as any).cursor.firstBatch[0];
+        
+        // Formatar resposta com dados principais
+        const cardDetails = {
+          id: card._id.$oid,
+          card_name: card.card_name,
+          issuer_name: card.issuer_name,
+          segment: card.segment,
+          card_brand: card.card_brand,
+          annual_fee: card.annual_fee,
+          category: card.category,
+          international_card: card.international_card,
+          virtual_cards: card.virtual_cards,
+          contactless: card.contactless,
+          card_material: card.card_material,
+          ranking_points: card.ranking_points,
+          ranking_benefits: card.ranking_benefits,
+          ranking_annuity: card.ranking_annuity,
+          ranking_miles_program: card.ranking_miles_program
+        };
+        
+        console.log('Cartão encontrado:', card.card_name);
+        res.status(200).json(cardDetails);
+        return;
+      } catch (dbError) {
+        console.error('Erro ao buscar cartão:', dbError);
+        res.status(500).json({ 
+          error: 'Database error', 
+          details: dbError instanceof Error ? dbError.message : 'Unknown error' 
+        });
         return;
       }
-      
-      res.status(200).json(card);
-      return;
     }
     
     // 404 para outras rotas
