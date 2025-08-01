@@ -42,7 +42,7 @@ app.get('/test-env', async (request, reply) => {
 // Listar instituições
 app.get('/issuers', async (request, reply) => {
   try {
-    console.log('Buscando issuers...');
+    console.log('Buscando issuers no MongoDB...');
     
     // Buscar dados direto do MongoDB
     const result = await prisma.$runCommandRaw({

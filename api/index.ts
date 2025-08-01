@@ -45,20 +45,33 @@ export default async function handler(req: any, res: any) {
     
     // Listar instituições
     if (req.url === '/issuers') {
-      // Dados mock para testar integração
-      const mockIssuers = [
-        { id: "1", issuer_name: "Banco do Brasil", issuer_type: "Banco do Brasil" },
-        { id: "2", issuer_name: "Bradesco", issuer_type: "Bradesco" },
-        { id: "3", issuer_name: "Itaú", issuer_type: "Banco Comercial" },
-        { id: "4", issuer_name: "Santander", issuer_type: "Santander" },
-        { id: "5", issuer_name: "Nubank", issuer_type: "Nubank" },
-        { id: "6", issuer_name: "C6 Bank", issuer_type: "C6 Bank" },
-        { id: "7", issuer_name: "Inter", issuer_type: "Inter" },
-        { id: "8", issuer_name: "BRB", issuer_type: "BRB" }
-      ];
-      
-      res.status(200).json(mockIssuers);
-      return;
+      try {
+        console.log('Buscando issuers no MongoDB...');
+        
+        // Buscar dados direto do MongoDB
+        const result = await prisma.$runCommandRaw({
+          find: 'issuers',
+          sort: { issuer_name: 1 }
+        });
+        
+        // Extrair dados do cursor MongoDB
+        const issuers = (result as any).cursor.firstBatch.map((item: any) => ({
+          id: item._id.$oid,
+          issuer_name: item.issuer_name,
+          issuer_type: item.issuer_type
+        }));
+        
+        console.log('Issuers encontrados:', issuers.length);
+        res.status(200).json(issuers);
+        return;
+      } catch (dbError) {
+        console.error('Erro no banco:', dbError);
+        res.status(500).json({ 
+          error: 'Database error', 
+          details: dbError instanceof Error ? dbError.message : 'Unknown error' 
+        });
+        return;
+      }
     }
     
     // Buscar cartões por segmento
