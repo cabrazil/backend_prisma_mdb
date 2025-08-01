@@ -164,6 +164,64 @@ export default async function handler(req: any, res: any) {
       }
     }
     
+    // Endpoint antigo para detalhes do cartão (compatibilidade)
+    if (req.url?.startsWith('/cardid')) {
+      try {
+        const url = new URL(req.url, 'https://dummy.com');
+        const cardId = url.searchParams.get('id');
+        
+        if (!cardId) {
+          res.status(400).json({ error: 'Missing card ID' });
+          return;
+        }
+        
+        console.log('Buscando detalhes do cartão (endpoint antigo):', cardId);
+        
+        // Buscar cartão direto do MongoDB
+        const result = await prisma.$runCommandRaw({
+          find: 'cards',
+          filter: { _id: { $oid: cardId } }
+        });
+        
+        if ((result as any).cursor.firstBatch.length === 0) {
+          res.status(404).json({ error: 'Card not found' });
+          return;
+        }
+        
+        const card = (result as any).cursor.firstBatch[0];
+        
+        // Formatar resposta com dados principais
+        const cardDetails = {
+          id: card._id.$oid,
+          card_name: card.card_name,
+          issuer_name: card.issuer_name,
+          segment: card.segment,
+          card_brand: card.card_brand,
+          annual_fee: card.annual_fee,
+          category: card.category,
+          international_card: card.international_card,
+          virtual_cards: card.virtual_cards,
+          contactless: card.contactless,
+          card_material: card.card_material,
+          ranking_points: card.ranking_points,
+          ranking_benefits: card.ranking_benefits,
+          ranking_annuity: card.ranking_annuity,
+          ranking_miles_program: card.ranking_miles_program
+        };
+        
+        console.log('Cartão encontrado (endpoint antigo):', card.card_name);
+        res.status(200).json(cardDetails);
+        return;
+      } catch (dbError) {
+        console.error('Erro ao buscar cartão (endpoint antigo):', dbError);
+        res.status(500).json({ 
+          error: 'Database error', 
+          details: dbError instanceof Error ? dbError.message : 'Unknown error' 
+        });
+        return;
+      }
+    }
+
     // Detalhes do cartão
     if (req.url?.startsWith('/cards/')) {
       const cardId = req.url.split('/cards/')[1];
