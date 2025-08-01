@@ -74,6 +74,60 @@ export default async function handler(req: any, res: any) {
       }
     }
     
+    // Endpoint antigo para compatibilidade com frontend
+    if (req.url?.startsWith('/cardexpense')) {
+      try {
+        const url = new URL(req.url, 'https://dummy.com');
+        const expense = url.searchParams.get('expense');
+        const issuer = url.searchParams.get('issuer');
+        
+        console.log('Buscando cartões - expense:', expense, 'issuer:', issuer);
+        
+        // Mapear expense para segment
+        const segmentMap: { [key: string]: string } = {
+          '5': 'ALTARENDA',      // expense=5 → ALTARENDA
+          '4': 'INTERMEDIARIO',  // expense=4 → INTERMEDIARIO  
+          '3': 'ENTRADA',        // expense=3 → ENTRADA
+        };
+        
+        const segment = segmentMap[expense || '5'] || 'ALTARENDA';
+        
+        // Buscar cartões direto do MongoDB
+        let filter: any = { segment: segment };
+        
+        // Se instituição especificada, filtrar também
+        if (issuer && issuer !== 'all') {
+          filter.issuer_name = issuer;
+        }
+        
+        const result = await prisma.$runCommandRaw({
+          find: 'cards',
+          filter: filter
+        });
+        
+        // Extrair dados do cursor MongoDB
+        const cards = (result as any).cursor.firstBatch.map((item: any) => ({
+          id: item._id.$oid,
+          card_name: item.card_name,
+          issuer_name: item.issuer_name,
+          segment: item.segment,
+          card_brand: item.card_brand,
+          annual_fee: item.annual_fee
+        }));
+        
+        console.log('Cartões encontrados:', cards.length);
+        res.status(200).json(cards);
+        return;
+      } catch (dbError) {
+        console.error('Erro ao buscar cartões:', dbError);
+        res.status(500).json({ 
+          error: 'Database error', 
+          details: dbError instanceof Error ? dbError.message : 'Unknown error' 
+        });
+        return;
+      }
+    }
+
     // Buscar cartões por segmento
     if (req.url?.startsWith('/cards/segment/')) {
       const segment = req.url.split('/cards/segment/')[1];
