@@ -6,7 +6,7 @@
     "dev": "tsx watch src/server.ts",
     "build": "echo 'No build needed'",
     "start": "tsx src/server.ts",
-    "vercel-build": "echo 'No build needed'"
+    "vercel-build": "prisma generate"
   },
   "keywords": [],
   "author": "",
